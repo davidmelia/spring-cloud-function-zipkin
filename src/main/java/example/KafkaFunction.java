@@ -6,32 +6,27 @@ import java.time.ZonedDateTime;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
-
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
-
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.reactive.function.client.WebClient.Builder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component(value = "function")
 @AllArgsConstructor
-public class MessageSenderFunction implements Function<Flux<Map<String, String>>, Flux<String>> {
+public class KafkaFunction implements Function<Flux<Map<String, String>>, Flux<String>> {
 
 	private StreamBridge streamBridge;
-	// private final MessageChannelPublisher messageChannelPublisher;
-
+	
 	@Override
 	public Flux<String> apply(Flux<Map<String, String>> flux) {
-		return flux.flatMap(v -> {
-		  System.out.println("dave");
-		  return Mono.just(v);
-		  
-		}).flatMap(v -> {
+		return flux.flatMap(response -> {
+		    log.info("response is {}",response);
 			Object kafkaEvent = MessageBuilder
 					.withPayload(Map.of("Key", String.format("Value @ %s", ZonedDateTime.now(ZoneOffset.UTC))))
 					.setHeaderIfAbsent(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString()).build();
@@ -45,4 +40,6 @@ public class MessageSenderFunction implements Function<Flux<Map<String, String>>
 			}
 		});
 	}
+
+
 }
