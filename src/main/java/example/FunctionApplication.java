@@ -10,4 +10,18 @@ public class FunctionApplication {
 		SpringApplication.run(FunctionApplication.class);
 	}
 
+	
+//	 @Bean
+//	  @Order(MicrometerTracingAutoConfiguration.SENDER_TRACING_OBSERVATION_HANDLER_ORDER)
+//	  public PropagatingSenderTracingObservationHandler<?> propagatingSenderTracingObservationHandler(Tracer tracer, Propagator propagator) {
+//	    return new PropagatingSenderTracingObservationHandler<>(tracer, propagator) {
+//	      @Override
+//	      public void customizeSenderSpan(SenderContext context, Span span) {
+//	        if (context instanceof ClientRequestObservationContext ctx) {
+//	          span.remoteServiceName("dave");
+//	          
+//	        }
+//	      }
+//	    };
+//	  }
 }
