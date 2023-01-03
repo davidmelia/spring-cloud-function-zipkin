@@ -24,7 +24,7 @@ public class WebClientFunction implements Function<Flux<Map<String, String>>, Fl
 	public Flux<String> apply(Flux<Map<String, String>> flux) {
 		return flux.flatMap(response -> {
 		    log.info("response is {}",response);
-			return webClient.get().retrieve().bodyToMono(Map.class).thenReturn("OK").delayElement(Duration.ofSeconds(4));
+			return webClient.get().retrieve().bodyToMono(Map.class).map(r -> {log.info("response={}",r); return r;} ).thenReturn("OK").delayElement(Duration.ofSeconds(4));
 	
 		});
 	}
