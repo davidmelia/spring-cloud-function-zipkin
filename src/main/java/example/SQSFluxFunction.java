@@ -22,5 +22,4 @@ public class SQSFluxFunction implements Function<Flux<SQSEvent>, Flux<String>> {
 		});
 	}
 
-
 }
