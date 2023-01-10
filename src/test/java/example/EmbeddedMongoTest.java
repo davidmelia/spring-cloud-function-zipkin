@@ -15,6 +15,7 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest
 @TestPropertySource(properties = {
     "de.flapdoodle.mongodb.embedded.version=4.2.23"
+    ,"spring.data.mongodb.uri=mongodb://localhost/test"
 })
 //@TestPropertySource(properties = {
 //    "spring.mongodb.embedded.version=4.2.19",
