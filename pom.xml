@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version>
+		<version>3.0.2</version>
 	</parent>
 	<groupId>uk.co.ii</groupId>
 	<artifactId>spring-cloud-fucntion-zipkin</artifactId>
@@ -16,14 +16,10 @@
 	<properties>
 	    <sonar.projectKey>${project.artifactId}</sonar.projectKey>
 		<java.version>17</java.version>
-		<spring-cloud.version>2022.0.0</spring-cloud.version>
+		<spring-cloud.version>2022.0.1</spring-cloud.version>
 		<aws-lambda-java-core.version>1.2.1</aws-lambda-java-core.version>	
 	</properties>
 	<dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-stream-kafka</artifactId>
-        </dependency>	
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
