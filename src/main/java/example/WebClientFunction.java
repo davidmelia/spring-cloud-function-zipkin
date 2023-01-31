@@ -16,24 +16,31 @@ import reactor.core.publisher.Mono;
 @Component(value = "function")
 public class WebClientFunction implements Function<Flux<Map<String, String>>, Flux<String>> {
 
-	private WebClient webClient;
-	
-	  public WebClientFunction(Builder webClientBuilder) {
-	    this.webClient = webClientBuilder.baseUrl("https://httpbin.org/json").build();
-	  }
+  private WebClient webClient;
 
-	@Override
-	public Flux<String> apply(Flux<Map<String, String>> flux) {
-		return flux.flatMap(response -> {
-          return Mono.deferContextual(contextView -> {
-            try (ContextSnapshot.Scope scope = ContextSnapshot.setThreadLocalsFrom(contextView,
-                    ObservationThreadLocalAccessor.KEY)) {
-		  
-		    log.info("response is {}",response);
-			return webClient.get().retrieve().bodyToMono(Map.class).map(r -> {log.info("response={}",r); return r;} ).thenReturn("OK").delayElement(Duration.ofSeconds(4));
-            }});
-		});
-	}
-	
+  // @Autowired
+  // private Tracer tracer;
+
+  public WebClientFunction(Builder webClientBuilder) {
+    this.webClient = webClientBuilder.baseUrl("https://httpbin.org/json").build();
+  }
+
+  @Override
+  public Flux<String> apply(Flux<Map<String, String>> flux) {
+    return flux.flatMap(response -> {
+      // tracer.startScopedSpan("dave");
+      return Mono.deferContextual(contextView -> {
+        try (ContextSnapshot.Scope scope = ContextSnapshot.setThreadLocalsFrom(contextView, ObservationThreadLocalAccessor.KEY)) {
+
+          log.info("response is {}", response);
+          return webClient.get().retrieve().bodyToMono(Map.class).map(r -> {
+            log.info("response={}", r);
+            return r;
+          }).thenReturn("OK").delayElement(Duration.ofSeconds(4));
+        }
+      });
+    });
+  }
+
 
 }
