@@ -18,6 +18,9 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.1</spring-cloud.version>
 		<aws-lambda-java-core.version>1.2.1</aws-lambda-java-core.version>	
+        <reactor-bom.version>2022.0.3</reactor-bom.version>
+        <micrometer-tracing.version>1.0.2</micrometer-tracing.version>
+        <micrometer.version>1.10.4</micrometer.version>		
 	</properties>
 	<dependencies>
 		<dependency>
@@ -36,7 +39,11 @@
 		<dependency>
 			<groupId>io.zipkin.reporter2</groupId>
 			<artifactId>zipkin-reporter-brave</artifactId>
-		</dependency>		
+		</dependency>	
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core-micrometer</artifactId>
+        </dependency>  			
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-actuator</artifactId>
