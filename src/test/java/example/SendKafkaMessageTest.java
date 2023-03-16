@@ -20,9 +20,8 @@ import org.springframework.util.Assert;
     "spring.cloud.stream.bindings.test-out-0.destination=test"
     ,"spring.cloud.stream.kafka.bindings.test-out-0.producer.configuration.key.serializer=org.apache.kafka.common.serialization.StringSerializer"
     ,"spring.cloud.stream.kafka.bindings.test-out-0.producer.configuration.value.serializer=org.springframework.kafka.support.serializer.JsonSerializer"
-    ,"spring.cloud.stream.kafka.binder.configuration.ssl.protocol=TLSv1.2"
     ,"spring.cloud.stream.kafka.binder.enable-observation=true"
-      
+    ,"spring.cloud.stream.kafka.binder.configuration.retry.backoff.ms=200"
 })
 public class SendKafkaMessageTest {
   
@@ -37,6 +36,8 @@ public class SendKafkaMessageTest {
         .build();
     boolean result = streamBridge.send("test-out-0", kafkaEvent);
     Assert.isTrue(result);
+    Thread.sleep(10000);
   }
   
 }
+
