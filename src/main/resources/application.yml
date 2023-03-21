@@ -4,9 +4,6 @@ management:
       exposure:
         include: '*'
   tracing:
-    sampling:
-# turn off zipkin
-      probability: 0.0
     baggage:
       remote-fields:
       - remote-field1
@@ -23,9 +20,3 @@ management:
         - correlation-field4
         - correlation-field5
         - correlation-field6
-  zipkin:
-    tracing:
-      endpoint: http://localhost:9411/api/v2/spans
-      connect-timeout: 2000
-      read-timeout: 2000
-      #enabled: false

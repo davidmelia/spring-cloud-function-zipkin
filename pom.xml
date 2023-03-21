@@ -9,9 +9,9 @@
 		<version>3.0.4</version>
 	</parent>
 	<groupId>uk.co.ii</groupId>
-	<artifactId>spring-cloud-fucntion-zipkin</artifactId>
+	<artifactId>spring-cloud-function-zipkin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-cloud-fucntion-zipkin</name>
+	<name>spring-cloud-function-zipkin</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 	    <sonar.projectKey>${project.artifactId}</sonar.projectKey>
@@ -34,16 +34,7 @@
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing-bridge-brave</artifactId>
-		</dependency> 		
-		<dependency>
-			<groupId>io.zipkin.reporter2</groupId>
-			<artifactId>zipkin-reporter-brave</artifactId>
-		</dependency>	       
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>      		
+		</dependency> 	  		
 	</dependencies>
 
 </project>
