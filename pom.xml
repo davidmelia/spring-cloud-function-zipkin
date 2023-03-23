@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 	</parent>
 	<groupId>uk.co.ii</groupId>
 	<artifactId>spring-cloud-function-zipkin</artifactId>
@@ -16,6 +16,8 @@
 	<properties>
 	    <sonar.projectKey>${project.artifactId}</sonar.projectKey>
 		<java.version>17</java.version>
+		<micrometer.version>1.10.5</micrometer.version>
+		<micrometer-tracing.version>1.0.4-SNAPSHOT</micrometer-tracing.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -34,7 +36,7 @@
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing-bridge-brave</artifactId>
-		</dependency> 	  		
+		</dependency> 	
 	</dependencies>
 	<build>
 		<plugins>
@@ -44,4 +46,14 @@
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>		
+	</repositories>	
 </project>
