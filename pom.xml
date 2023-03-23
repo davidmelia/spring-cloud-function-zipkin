@@ -16,7 +16,6 @@
 	<properties>
 	    <sonar.projectKey>${project.artifactId}</sonar.projectKey>
 		<java.version>17</java.version>
-		<micrometer.version>1.10.5</micrometer.version>
 		<micrometer-tracing.version>1.0.4-SNAPSHOT</micrometer-tracing.version>
 	</properties>
 	<dependencies>
