@@ -20,3 +20,9 @@ management:
         - correlation-field4
         - correlation-field5
         - correlation-field6
+---
+management:
+  tracing:
+    baggage:
+      correlation:
+        enabled: false
