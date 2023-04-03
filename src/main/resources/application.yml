@@ -1,22 +1,3 @@
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  tracing:
-    baggage:
-      remote-fields:
-      - remote-field1
-      - remote-field2
-      - remote-field3
-      - remote-field4
-      - remote-field5
-      - remote-field6
-      correlation:
-        fields:
-        - correlation-field1
-        - correlation-field2
-        - correlation-field3
-        - correlation-field4
-        - correlation-field5
-        - correlation-field6
+logging:
+  pattern:
+    level: "%5p [aid=${spring.application.name:-},tid=%X{traceId:-},sid=%X{spanId:-}]"
