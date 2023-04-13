@@ -33,14 +33,14 @@ public class WebClientFunction implements Function<Flux<Map<String, String>>, Fl
     return flux
         .contextWrite(context -> Context.empty())
         .flatMap(request -> {
-      log.info("1) this does have a trace id");
-      return Mono.just(request).doOnNext(r -> log.info("2) this does have a trace id", request)).then(webClient.get().retrieve().bodyToMono(Map.class).map(r -> {
-        log.info("3) this does have a trace id");
-        return r;
-      }).thenReturn("OK"));
-
-    }).tap(Micrometer.observation(observationRegistry))
-      .contextCapture();
+            log.info("1) this does have a trace id");
+            return Mono.just(request).doOnNext(r -> log.info("2) this does have a trace id", request)).then(webClient.get().retrieve().bodyToMono(Map.class).map(r -> {
+            log.info("3) this does have a trace id");
+            return r;
+            }).thenReturn("OK"));
+        })
+        .tap(Micrometer.observation(observationRegistry))
+        .contextCapture();
   }
 
 
