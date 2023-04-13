@@ -12,6 +12,7 @@ import reactor.core.observability.micrometer.Micrometer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Hooks;
 import reactor.core.publisher.Mono;
+import reactor.util.context.Context;
 
 @Slf4j
 @Component(value = "function")
@@ -29,14 +30,17 @@ public class WebClientFunction implements Function<Flux<Map<String, String>>, Fl
 
   @Override
   public Flux<String> apply(Flux<Map<String, String>> flux) {
-    return flux.flatMap(request -> {
-      log.info("1) this does not have a trace id");
-      return Mono.just(request).doOnNext(r -> log.info("2) this does not have a trace id", request)).then(webClient.get().retrieve().bodyToMono(Map.class).map(r -> {
+    return flux
+        .contextWrite(context -> Context.empty())
+        .flatMap(request -> {
+      log.info("1) this does have a trace id");
+      return Mono.just(request).doOnNext(r -> log.info("2) this does have a trace id", request)).then(webClient.get().retrieve().bodyToMono(Map.class).map(r -> {
         log.info("3) this does have a trace id");
         return r;
       }).thenReturn("OK"));
 
-    }).tap(Micrometer.observation(observationRegistry));
+    }).tap(Micrometer.observation(observationRegistry))
+      .contextCapture();
   }
 
 
